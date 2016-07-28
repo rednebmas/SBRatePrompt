@@ -12,6 +12,8 @@
 		223200561D49C00200F1C864 /* SBRatePromptStarsDialogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 223200531D49C00200F1C864 /* SBRatePromptStarsDialogViewController.xib */; };
 		223200591D49C03000F1C864 /* SBRatePromptFlowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 223200571D49C03000F1C864 /* SBRatePromptFlowController.h */; };
 		2232005A1D49C03000F1C864 /* SBRatePromptFlowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 223200581D49C03000F1C864 /* SBRatePromptFlowController.m */; };
+		2232005F1D49CAE300F1C864 /* SBRatePromptWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 2232005D1D49CAE300F1C864 /* SBRatePromptWindow.h */; };
+		223200601D49CAE300F1C864 /* SBRatePromptWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2232005E1D49CAE300F1C864 /* SBRatePromptWindow.m */; };
 		224A999C1D49BD7A000FD1C1 /* SBRatePrompt.h in Headers */ = {isa = PBXBuildFile; fileRef = 224A999B1D49BD7A000FD1C1 /* SBRatePrompt.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		224A99A31D49BD7A000FD1C1 /* SBRatePrompt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224A99981D49BD7A000FD1C1 /* SBRatePrompt.framework */; };
 		224A99A81D49BD7A000FD1C1 /* SBRatePromptTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 224A99A71D49BD7A000FD1C1 /* SBRatePromptTests.m */; };
@@ -34,6 +36,8 @@
 		223200531D49C00200F1C864 /* SBRatePromptStarsDialogViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBRatePromptStarsDialogViewController.xib; sourceTree = "<group>"; };
 		223200571D49C03000F1C864 /* SBRatePromptFlowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBRatePromptFlowController.h; sourceTree = "<group>"; };
 		223200581D49C03000F1C864 /* SBRatePromptFlowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBRatePromptFlowController.m; sourceTree = "<group>"; };
+		2232005D1D49CAE300F1C864 /* SBRatePromptWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBRatePromptWindow.h; sourceTree = "<group>"; };
+		2232005E1D49CAE300F1C864 /* SBRatePromptWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBRatePromptWindow.m; sourceTree = "<group>"; };
 		224A99981D49BD7A000FD1C1 /* SBRatePrompt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SBRatePrompt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		224A999B1D49BD7A000FD1C1 /* SBRatePrompt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBRatePrompt.h; sourceTree = "<group>"; };
 		224A999D1D49BD7A000FD1C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 			isa = PBXGroup;
 			children = (
 				223200531D49C00200F1C864 /* SBRatePromptStarsDialogViewController.xib */,
+				2232005D1D49CAE300F1C864 /* SBRatePromptWindow.h */,
+				2232005E1D49CAE300F1C864 /* SBRatePromptWindow.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -128,6 +134,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				223200541D49C00200F1C864 /* SBRatePromptStarsDialogViewController.h in Headers */,
+				2232005F1D49CAE300F1C864 /* SBRatePromptWindow.h in Headers */,
 				224A999C1D49BD7A000FD1C1 /* SBRatePrompt.h in Headers */,
 				223200591D49C03000F1C864 /* SBRatePromptFlowController.h in Headers */,
 			);
@@ -232,6 +239,7 @@
 			files = (
 				2232005A1D49C03000F1C864 /* SBRatePromptFlowController.m in Sources */,
 				224A99F91D49BEC9000FD1C1 /* SBRatePrompt.m in Sources */,
+				223200601D49CAE300F1C864 /* SBRatePromptWindow.m in Sources */,
 				223200551D49C00200F1C864 /* SBRatePromptStarsDialogViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

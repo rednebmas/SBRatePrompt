@@ -26,7 +26,7 @@
 }
 
 - (IBAction)show:(id)sender {
-    // [SBRatePrompt debugShow];
+    [SBRatePrompt debugShow];
 }
 
 @end

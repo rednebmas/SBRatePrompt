@@ -7,12 +7,14 @@
 //
 
 #import "SBRatePromptFlowController.h"
+#import "SBRatePromptWindow.h"
 #import "SBRatePromptStarsDialogViewController.h"
 
-#define SBRatePromptBundle [NSBundle bundleForClass:[SBRatePromptStarsDialogViewController class]]
+#define SBRatePromptBundle [NSBundle bundleForClass:[self class]]
 
 @interface SBRatePromptFlowController()
 
+@property (nonatomic, strong) SBRatePromptWindow *window;
 @property (nonatomic, strong) SBRatePromptStarsDialogViewController *starDialog;
 
 @end
@@ -21,14 +23,20 @@
 
 - (void)begin
 {
+    [self displayWindow];
     [self displayStarRatingPrompt];
-    
+}
+
+- (void)displayWindow {
+    self.window = [[SBRatePromptWindow alloc] init];
+    [self.window makeKeyAndVisible];
+    [self.window animateInWithDuration:.25];
 }
 
 - (void)displayStarRatingPrompt {
-    self.starDialog = [SBRatePromptBundle loadNibNamed:NSStringFromClass([SBRatePromptStarsDialogViewController class]) owner:self options:nil];
-    self.starDialog.view.backgroundColor = [UIColor redColor];
-    [[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:self.starDialog animated:YES completion:nil];
+    self.starDialog = [[SBRatePromptStarsDialogViewController alloc]
+                       initWithNibName:@"SBRatePromptStarsDialogViewController"
+                       bundle:SBRatePromptBundle];
 }
 
 @end
