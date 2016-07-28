@@ -6,11 +6,10 @@
 //  Copyright © 2016 Sam Bender. All rights reserved.
 //
 
+#import "SBRatePromptConstants.h"
 #import "SBRatePromptFlowController.h"
 #import "SBRatePromptWindow.h"
 #import "SBRatePromptStarsDialogViewController.h"
-
-#define SBRatePromptBundle [NSBundle bundleForClass:[self class]]
 
 @interface SBRatePromptFlowController()
 
@@ -37,6 +36,7 @@
     self.starDialog = [[SBRatePromptStarsDialogViewController alloc]
                        initWithNibName:@"SBRatePromptStarsDialogViewController"
                        bundle:SBRatePromptBundle];
+    [self.window addSubview:self.starDialog.view];
 }
 
 @end

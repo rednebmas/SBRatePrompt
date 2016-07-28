@@ -10,28 +10,56 @@
 
 @interface SBRatePromptStarsDialogViewController ()
 
+@property (nonatomic, assign) BOOL hasAddedConstraints;
+
 @end
 
 @implementation SBRatePromptStarsDialogViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)updateViewConstraints {
+    if (self.hasAddedConstraints == NO && self.view.superview != nil)
+    {
+        self.hasAddedConstraints = YES;
+        [self addConstraints];
+    }
+    
+    [super updateViewConstraints];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)addConstraints
+{
+    NSLayoutConstraint *xCenterConstraint = [NSLayoutConstraint
+                                             constraintWithItem:self.view.superview
+                                             attribute:NSLayoutAttributeCenterX
+                                             relatedBy:NSLayoutRelationEqual
+                                             toItem:self.view
+                                             attribute:NSLayoutAttributeCenterX
+                                             multiplier:1.0
+                                             constant:0];
+    NSLayoutConstraint *yCenterConstraint = [NSLayoutConstraint
+                                             constraintWithItem:self.view.superview
+                                             attribute:NSLayoutAttributeCenterY
+                                             relatedBy:NSLayoutRelationEqual
+                                             toItem:self.view
+                                             attribute:NSLayoutAttributeCenterY
+                                             multiplier:1.0
+                                             constant:0];
+    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint
+                                           constraintWithItem:self.view
+                                           attribute:NSLayoutAttributeWidth
+                                           relatedBy:NSLayoutRelationEqual
+                                           toItem:nil
+                                           attribute:NSLayoutAttributeNotAnAttribute
+                                           multiplier:1.0
+                                           constant:self.view.frame.size.width];
+    self.view.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addConstraint:widthConstraint];
+    [self.view.superview addConstraint:xCenterConstraint];
+    [self.view.superview addConstraint:yCenterConstraint];
 }
-*/
 
 @end
