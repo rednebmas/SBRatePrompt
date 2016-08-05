@@ -10,8 +10,9 @@
 #import "SBRatePromptFlowController.h"
 #import "SBRatePromptWindow.h"
 #import "SBRatePromptStarsDialogViewController.h"
+#import "SBDispatch.h"
 
-@interface SBRatePromptFlowController()
+@interface SBRatePromptFlowController () <SBRatePromptStarsDialogDelegate>
 
 @property (nonatomic, strong) SBRatePromptWindow *window;
 @property (nonatomic, strong) SBRatePromptStarsDialogViewController *starDialog;
@@ -26,6 +27,8 @@
     [self displayStarRatingPrompt];
 }
 
+#pragma mark - Display views
+
 - (void)displayWindow {
     self.window = [[SBRatePromptWindow alloc] init];
     [self.window makeKeyAndVisible];
@@ -36,7 +39,30 @@
     self.starDialog = [[SBRatePromptStarsDialogViewController alloc]
                        initWithNibName:@"SBRatePromptStarsDialogViewController"
                        bundle:SBRatePromptBundle];
+    self.starDialog.delegate = self;
     [self.window addSubview:self.starDialog.view];
+}
+
+#pragma mark - Hide/remove views
+
+- (void)removeStarsDialog {
+    [self.starDialog.view removeFromSuperview];
+}
+
+#pragma mark - Star rating prompt dialog delegate
+
+- (void)userSelectedRating:(NSInteger)rating {
+    NSTimeInterval waitBeforeMovingAwayStarsDialog = 1.25;
+    NSTimeInterval animateAwayDuration = 0.5;
+    
+    [SBDispatch dispatch:^{
+        [self.starDialog animateAwayWithDuration:animateAwayDuration];
+    } afterDuration:waitBeforeMovingAwayStarsDialog];
+    
+    [SBDispatch dispatch:^{
+        [self removeStarsDialog];
+    } afterDuration:waitBeforeMovingAwayStarsDialog + animateAwayDuration];
+    
 }
 
 @end

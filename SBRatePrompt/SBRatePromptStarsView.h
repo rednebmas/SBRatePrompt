@@ -10,7 +10,7 @@
 
 @protocol SBRateStarsViewDelegate <NSObject>
 
-- (void)touchEndedInStar:(NSInteger)star;
+- (void)starsViewSelectedStar:(NSInteger)star;
 
 @end
 

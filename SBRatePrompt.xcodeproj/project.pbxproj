@@ -26,6 +26,8 @@
 		224A99A31D49BD7A000FD1C1 /* SBRatePrompt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224A99981D49BD7A000FD1C1 /* SBRatePrompt.framework */; };
 		224A99A81D49BD7A000FD1C1 /* SBRatePromptTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 224A99A71D49BD7A000FD1C1 /* SBRatePromptTests.m */; };
 		224A99F91D49BEC9000FD1C1 /* SBRatePrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = 224A99F81D49BEC9000FD1C1 /* SBRatePrompt.m */; };
+		225B127B1D544D0900F4A2D4 /* SBDispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 225B12791D544D0900F4A2D4 /* SBDispatch.h */; };
+		225B127C1D544D0900F4A2D4 /* SBDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 225B127A1D544D0900F4A2D4 /* SBDispatch.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		224A99A71D49BD7A000FD1C1 /* SBRatePromptTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBRatePromptTests.m; sourceTree = "<group>"; };
 		224A99A91D49BD7A000FD1C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		224A99F81D49BEC9000FD1C1 /* SBRatePrompt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBRatePrompt.m; sourceTree = "<group>"; };
+		225B12791D544D0900F4A2D4 /* SBDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBDispatch.h; sourceTree = "<group>"; };
+		225B127A1D544D0900F4A2D4 /* SBDispatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBDispatch.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +124,8 @@
 			children = (
 				2232006B1D49D6CA00F1C864 /* SBAnimation.h */,
 				2232006C1D49D6CA00F1C864 /* SBAnimation.m */,
+				225B12791D544D0900F4A2D4 /* SBDispatch.h */,
+				225B127A1D544D0900F4A2D4 /* SBDispatch.m */,
 			);
 			name = Lib;
 			sourceTree = "<group>";
@@ -188,6 +194,7 @@
 				223200591D49C03000F1C864 /* SBRatePromptFlowController.h in Headers */,
 				223200681D49D17300F1C864 /* SBRatePromptStarsView.h in Headers */,
 				223200721D49D77700F1C864 /* SBRatePromptConstants.h in Headers */,
+				225B127B1D544D0900F4A2D4 /* SBDispatch.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +301,7 @@
 				224A99F91D49BEC9000FD1C1 /* SBRatePrompt.m in Sources */,
 				223200601D49CAE300F1C864 /* SBRatePromptWindow.m in Sources */,
 				223200731D49D77700F1C864 /* SBRatePromptConstants.m in Sources */,
+				225B127C1D544D0900F4A2D4 /* SBDispatch.m in Sources */,
 				223200551D49C00200F1C864 /* SBRatePromptStarsDialogViewController.m in Sources */,
 				223200691D49D17300F1C864 /* SBRatePromptStarsView.m in Sources */,
 				2232006E1D49D6CA00F1C864 /* SBAnimation.m in Sources */,

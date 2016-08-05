@@ -6,21 +6,33 @@
 //  Copyright © 2016 Sam Bender. All rights reserved.
 //
 
+#define viewWidth(view) view.frame.size.width
+
 #import "SBRatePromptStarsDialogViewController.h"
 
-@interface SBRatePromptStarsDialogViewController ()
+@interface SBRatePromptStarsDialogViewController () <SBRateStarsViewDelegate>
 
 @property (nonatomic, assign) BOOL hasAddedConstraints;
+@property (nonatomic, retain) NSLayoutConstraint *xCenterConstraint;
 
 @end
 
 @implementation SBRatePromptStarsDialogViewController
 
-- (void)viewDidLoad {
+@dynamic view;
+
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    self.view.delegate = self;
 }
 
-- (void)updateViewConstraints {
+#pragma mark - Constraints
+
+- (void)updateViewConstraints
+{
     if (self.hasAddedConstraints == NO && self.view.superview != nil)
     {
         self.hasAddedConstraints = YES;
@@ -32,14 +44,14 @@
 
 - (void)addConstraints
 {
-    NSLayoutConstraint *xCenterConstraint = [NSLayoutConstraint
-                                             constraintWithItem:self.view.superview
-                                             attribute:NSLayoutAttributeCenterX
-                                             relatedBy:NSLayoutRelationEqual
-                                             toItem:self.view
-                                             attribute:NSLayoutAttributeCenterX
-                                             multiplier:1.0
-                                             constant:0];
+    self.xCenterConstraint = [NSLayoutConstraint
+                              constraintWithItem:self.view.superview
+                              attribute:NSLayoutAttributeCenterX
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:self.view
+                              attribute:NSLayoutAttributeCenterX
+                              multiplier:1.0
+                              constant:0];
     NSLayoutConstraint *yCenterConstraint = [NSLayoutConstraint
                                              constraintWithItem:self.view.superview
                                              attribute:NSLayoutAttributeCenterY
@@ -58,8 +70,26 @@
                                            constant:self.view.frame.size.width];
     self.view.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addConstraint:widthConstraint];
-    [self.view.superview addConstraint:xCenterConstraint];
+    [self.view.superview addConstraint:self.xCenterConstraint];
     [self.view.superview addConstraint:yCenterConstraint];
+}
+
+- (void)animateAwayWithDuration:(NSTimeInterval)animationDuration
+{
+    CGFloat distance = viewWidth(self.view) / 2.0 + viewWidth(self.view.superview) / 2.0;
+    
+    [self.view layoutIfNeeded];
+    self.xCenterConstraint.constant = distance;
+    [UIView animateWithDuration:animationDuration animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+#pragma mark - Stars view delegate
+
+- (void)starsViewSelectedStar:(NSInteger)star
+{
+    [self.delegate userSelectedRating:star];
 }
 
 @end
