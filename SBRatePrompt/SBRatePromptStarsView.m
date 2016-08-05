@@ -85,20 +85,21 @@ static CGFloat const notTouchingAlpha = 1.0;
     
     CGPoint touchPoint = [[touches anyObject] locationInView:self];
     UIButton *star = [self starForTouchPoint:touchPoint];
-    if (star != nil)
+    BOOL tochEndedInStar = star != nil;
+    if (tochEndedInStar)
     {
         [self flipStarsToStar:star];
         [self.delegate touchEndedInStar:star.tag + 1];
     }
     
-    [self clearTouches];
+    [self clearTouchesAnimated:tochEndedInStar == NO];
 }
 
 - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [super touchesCancelled:touches withEvent:event];
     if (self.recognizing == NO) return;
-    [self clearTouches];
+    [self clearTouchesAnimated:YES];
 }
 
 #pragma mark - Touches helper
@@ -130,12 +131,15 @@ static CGFloat const notTouchingAlpha = 1.0;
     return nil;
 }
 
-- (void)clearTouches
+- (void)clearTouchesAnimated:(BOOL)animated
 {
     self.recognizing = NO;
     if (self.currentlyTouching != nil)
     {
-        [self animateAlpha:notTouchingAlpha forStarUpToIndex:self.stars.count];
+        if (animated)
+        {
+            [self animateAlpha:notTouchingAlpha forStarUpToIndex:self.stars.count];
+        }
         self.currentlyTouching = nil;
     }
 }
@@ -158,7 +162,7 @@ static CGFloat const notTouchingAlpha = 1.0;
      }];
 }
 
-- (void)flipStarsToStar:(UIButton*)star
+- (void)flipStarsToStar:(UIButton*)tappedStar
 {
     UIImage *starred = [UIImage imageNamed:@"star"
                                   inBundle:SBRatePromptBundle
@@ -166,19 +170,26 @@ static CGFloat const notTouchingAlpha = 1.0;
     
     CGFloat flipDuration = .25;
     CGFloat nextStarDelay = .04;
-    for (int i = 0; i < star.tag + 1; i++)
+    for (int i = 0; i < tappedStar.tag + 1; i++)
     {
+        UIButton *star = self.stars[i];
         CGFloat delay = (CGFloat)i * nextStarDelay;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)),
                        dispatch_get_main_queue(), ^
-                       {
-                           [SBAnimation rotateOverYAxis:self.stars[i] duration:flipDuration];
-                           dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(flipDuration / 2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-                                          {
-                                              [self.stars[i] setBackgroundImage:starred forState:UIControlStateNormal];
-                                          });
-                       });
+        {
+           [self flipStar:star withAnimationDuration:flipDuration andBackgroundImage:starred];
+        });
     }
+}
+
+- (void)flipStar:(UIButton*)star withAnimationDuration:(CGFloat)animationDuration andBackgroundImage:(UIImage*)image
+{
+    [SBAnimation rotateOverYAxis:star duration:animationDuration];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(animationDuration / 2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+    {
+        [star setBackgroundImage:image forState:UIControlStateNormal];
+        star.alpha = 1.0;
+    });
 }
 
 @end
