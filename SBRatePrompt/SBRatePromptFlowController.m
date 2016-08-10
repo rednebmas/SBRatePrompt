@@ -37,7 +37,7 @@
 
 - (void)displayStarRatingPrompt {
     self.starDialog = [[SBRatePromptStarsDialogViewController alloc]
-                       initWithNibName:@"SBRatePromptStarsDialogViewController"
+                       initWithNibName:@"SBRatePromptStarsDialogView"
                        bundle:SBRatePromptBundle];
     self.starDialog.delegate = self;
     [self.window addSubview:self.starDialog.view];
@@ -45,7 +45,7 @@
 
 - (void)loadActionDialog {
     self.actionDialog = [[SBRatePromptActionDialogViewController alloc]
-                         initWithNibName:@"SBRatePromptActionDialogViewController"
+                         initWithNibName:@"SBRatePromptActionDialogView"
                          bundle:SBRatePromptBundle];
     [self.window addSubview:self.actionDialog.view];
 }
@@ -60,7 +60,7 @@
 
 - (void)userSelectedRating:(NSInteger)rating {
     NSTimeInterval waitBeforeMovingAwayFromStarsDialog = 0.75;
-    NSTimeInterval animationDuration = 1.0;
+    NSTimeInterval animationDuration = 0.75;
     
     [self loadActionDialog];
     
