@@ -11,11 +11,13 @@
 #import "SBRatePromptWindow.h"
 #import "SBRatePromptStarsDialogViewController.h"
 #import "SBDispatch.h"
+#import "SBRatePromptActionDialogViewController.h"
 
 @interface SBRatePromptFlowController () <SBRatePromptStarsDialogDelegate>
 
 @property (nonatomic, strong) SBRatePromptWindow *window;
 @property (nonatomic, strong) SBRatePromptStarsDialogViewController *starDialog;
+@property (nonatomic, strong) SBRatePromptActionDialogViewController *actionDialog;
 
 @end
 
@@ -26,8 +28,6 @@
     [self displayWindow];
     [self displayStarRatingPrompt];
 }
-
-#pragma mark - Display views
 
 - (void)displayWindow {
     self.window = [[SBRatePromptWindow alloc] init];
@@ -43,6 +43,13 @@
     [self.window addSubview:self.starDialog.view];
 }
 
+- (void)loadActionDialog {
+    self.actionDialog = [[SBRatePromptActionDialogViewController alloc]
+                         initWithNibName:@"SBRatePromptActionDialogViewController"
+                         bundle:SBRatePromptBundle];
+    [self.window addSubview:self.actionDialog.view];
+}
+
 #pragma mark - Hide/remove views
 
 - (void)removeStarsDialog {
@@ -52,17 +59,19 @@
 #pragma mark - Star rating prompt dialog delegate
 
 - (void)userSelectedRating:(NSInteger)rating {
-    NSTimeInterval waitBeforeMovingAwayStarsDialog = 1.25;
-    NSTimeInterval animateAwayDuration = 0.5;
+    NSTimeInterval waitBeforeMovingAwayFromStarsDialog = 0.75;
+    NSTimeInterval animationDuration = 1.0;
+    
+    [self loadActionDialog];
     
     [SBDispatch dispatch:^{
-        [self.starDialog animateAwayWithDuration:animateAwayDuration];
-    } afterDuration:waitBeforeMovingAwayStarsDialog];
+        [self.starDialog animateAwayWithDuration:animationDuration];
+        [self.actionDialog animateInWithDuration:animationDuration];
+    } afterDuration:waitBeforeMovingAwayFromStarsDialog];
     
     [SBDispatch dispatch:^{
         [self removeStarsDialog];
-    } afterDuration:waitBeforeMovingAwayStarsDialog + animateAwayDuration];
-    
+    } afterDuration:waitBeforeMovingAwayFromStarsDialog + animationDuration];
 }
 
 @end

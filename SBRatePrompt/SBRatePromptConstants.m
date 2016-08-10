@@ -10,4 +10,15 @@
 
 @implementation SBRatePromptConstants
 
++ (CGFloat)dialogWidth
+{
+    return 320.0f;
+}
+
+
++ (CGFloat)dialogAnimationDistanceOffset
+{
+    return 700.0f;
+}
+
 @end

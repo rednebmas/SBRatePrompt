@@ -9,6 +9,7 @@
 #import "SBRatePromptStarsView.h"
 #import "SBAnimation.h"
 #import "SBRatePromptConstants.h"
+#import "SBDispatch.h"
 
 static CGFloat const touchingAlpha = 0.5;
 static CGFloat const notTouchingAlpha = 1.0;
@@ -168,28 +169,28 @@ static CGFloat const notTouchingAlpha = 1.0;
                                   inBundle:SBRatePromptBundle
              compatibleWithTraitCollection:nil];
     
-    CGFloat flipDuration = .25;
-    CGFloat nextStarDelay = .04;
+    NSTimeInterval flipDuration = .25;
+    NSTimeInterval nextStarDelay = .04;
     for (int i = 0; i < tappedStar.tag + 1; i++)
     {
         UIButton *star = self.stars[i];
-        CGFloat delay = (CGFloat)i * nextStarDelay;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)),
-                       dispatch_get_main_queue(), ^
-        {
-           [self flipStar:star withAnimationDuration:flipDuration andBackgroundImage:starred];
-        });
+        NSTimeInterval delay = (NSTimeInterval)i * nextStarDelay;
+        [SBDispatch dispatch:^{
+            [self
+             flipStar:star
+             withAnimationDuration:flipDuration
+             andBackgroundImage:starred];
+        } afterDuration:delay];
     }
 }
 
-- (void)flipStar:(UIButton*)star withAnimationDuration:(CGFloat)animationDuration andBackgroundImage:(UIImage*)image
+- (void)flipStar:(UIButton*)star withAnimationDuration:(NSTimeInterval)animationDuration andBackgroundImage:(UIImage*)image
 {
     [SBAnimation rotateOverYAxis:star duration:animationDuration];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(animationDuration / 2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-    {
+    [SBDispatch dispatch:^{
         [star setBackgroundImage:image forState:UIControlStateNormal];
         star.alpha = 1.0;
-    });
+    } afterDuration:animationDuration / 2.0];
 }
 
 @end

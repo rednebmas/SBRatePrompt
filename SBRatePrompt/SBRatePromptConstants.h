@@ -6,10 +6,13 @@
 //  Copyright © 2016 Sam Bender. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #define SBRatePromptBundle [NSBundle bundleForClass:[SBRatePromptConstants class]]
 
 @interface SBRatePromptConstants : NSObject
+
++ (CGFloat)dialogWidth;
++ (CGFloat)dialogAnimationDistanceOffset;
 
 @end
