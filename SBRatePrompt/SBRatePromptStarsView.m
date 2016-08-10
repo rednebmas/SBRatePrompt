@@ -91,6 +91,7 @@ static CGFloat const notTouchingAlpha = 1.0;
     {
         [self flipStarsToStar:star];
         [self.delegate starsViewSelectedStar:star.tag + 1];
+        self.userInteractionEnabled = NO;
     }
     
     [self clearTouchesAnimated:tochEndedInStar == NO];
