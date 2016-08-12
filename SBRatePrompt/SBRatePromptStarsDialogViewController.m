@@ -60,6 +60,15 @@
                      completion:nil];
 }
 
+- (void)animateInWithDuration:(NSTimeInterval)animationDuration;
+{
+    self.view.transform = CGAffineTransformMakeScale(0.001, 0.001);
+    [UIView animateWithDuration:animationDuration
+                     animations:^{
+                         self.view.transform = CGAffineTransformIdentity;
+                     }];
+}
+
 - (CGFloat)endAnimationPosition
 {
     CGFloat outOfView = viewWidth(self.view) / 2.0 + viewWidth(self.view.superview) / 2.0;

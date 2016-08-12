@@ -15,10 +15,9 @@
     return 320.0f;
 }
 
-
 + (CGFloat)dialogAnimationDistanceOffset
 {
-    return 700.0f;
+    return 600.0f;
 }
 
 @end

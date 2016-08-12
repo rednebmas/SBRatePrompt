@@ -10,11 +10,14 @@
 #import "SBRatePromptActionDialogViewController.h"
 #import "SBAutoLayoutUtility.h"
 #import "SBRatePromptConstants.h"
+#import "SBDispatch.h"
 
 @interface SBRatePromptActionDialogViewController ()
 
 @property (nonatomic, assign) BOOL hasAddedConstraints;
 @property (nonatomic, retain) NSLayoutConstraint *xCenterConstraint;
+@property (nonatomic, copy) SBDialogBlock onLeftButtonTap;
+@property (nonatomic, copy) SBDialogBlock onRightButtonTap;
 
 @end
 
@@ -48,6 +51,14 @@
     return -outOfView - [SBRatePromptConstants dialogAnimationDistanceOffset];
 }
 
+#pragma mark - Public
+
+- (void)onLeftButtonTap:(SBDialogBlock)leftButtonBlock onRightButtonTap:(SBDialogBlock)rightButtonBlock;
+{
+    self.onLeftButtonTap = leftButtonBlock;
+    self.onRightButtonTap = rightButtonBlock;
+}
+
 - (void)animateInWithDuration:(NSTimeInterval)animationDuration
 {
     [self.view layoutIfNeeded];
@@ -61,13 +72,34 @@
                      completion:nil];
 }
 
-#pragma mark - Actions
-
-- (IBAction)rightButtonTouchUp:(UIButton *)sender {
-    
+- (void)animateAwayWithDuration:(NSTimeInterval)animationDuration;
+{
+    [UIView animateWithDuration:animationDuration
+                     animations:^{
+                         self.view.transform = CGAffineTransformMakeScale(0.001, 0.001);
+                     }];
 }
 
-- (IBAction)leftButtonTouchUp:(UIButton *)sender {
+#pragma mark - Actions
+
+- (IBAction)rightButtonTouchUp:(UIButton *)sender
+{
+    self.view.userInteractionEnabled = NO;
+    if (self.onRightButtonTap) {
+        [SBDispatch dispatchAsyncOnMainQueue:^{
+            self.onRightButtonTap();
+        }];
+    }
+}
+
+- (IBAction)leftButtonTouchUp:(UIButton *)sender
+{
+    self.view.userInteractionEnabled = NO;
+    if (self.onLeftButtonTap) {
+        [SBDispatch dispatchAsyncOnMainQueue:^{
+            self.onLeftButtonTap();
+        }];
+    }
 }
 
 @end

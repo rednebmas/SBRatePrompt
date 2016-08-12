@@ -13,6 +13,7 @@
 @interface SBRatePromptWindowController : UIViewController
 
 - (SBRatePromptWindow*)window;
-- (void)dismissAndOnCompletion:(void (^)(void))competion;
+- (void)animateDismissWithDuration:(NSTimeInterval)duration
+                   andOnCompletion:(void (^)(void))competion;
 
 @end

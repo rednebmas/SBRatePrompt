@@ -11,5 +11,6 @@
 @interface SBDispatch : NSObject
 
 + (void)dispatch:(void (^)(void))block afterDuration:(NSTimeInterval)duration;
++ (void)dispatchAsyncOnMainQueue:(void (^)(void))block;
 
 @end

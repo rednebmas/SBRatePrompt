@@ -18,8 +18,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kNJ-yi-dx1">
-                                <rect key="frame" x="229" y="285" width="142" height="30"/>
-                                <state key="normal" title="Show SBRatePrompt"/>
+                                <rect key="frame" x="204.5" y="277" width="191" height="46"/>
+                                <color key="backgroundColor" red="0.26274509800000001" green="0.4941176471" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="XsL-aj-Rke"/>
+                                    <constraint firstAttribute="width" constant="191" id="eGc-Dn-q2M"/>
+                                </constraints>
+                                <state key="normal" title="Show SBRatePrompt">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="show:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jj8-nl-kYJ"/>
                                 </connections>
@@ -34,6 +46,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="461" y="365"/>
         </scene>
     </scenes>
 </document>

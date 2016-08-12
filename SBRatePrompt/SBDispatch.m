@@ -10,8 +10,16 @@
 
 @implementation SBDispatch
 
-+ (void)dispatch:(void (^)(void))block afterDuration:(NSTimeInterval)duration {
++ (void)dispatch:(void (^)(void))block afterDuration:(NSTimeInterval)duration
+{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        block();
+    });
+}
+
++ (void)dispatchAsyncOnMainQueue:(void (^)(void))block
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
         block();
     });
 }

@@ -170,8 +170,8 @@ static CGFloat const notTouchingAlpha = 1.0;
                                   inBundle:SBRatePromptBundle
              compatibleWithTraitCollection:nil];
     
-    NSTimeInterval flipDuration = .25;
-    NSTimeInterval nextStarDelay = .04;
+    NSTimeInterval flipDuration = .20;
+    NSTimeInterval nextStarDelay = .03;
     for (int i = 0; i < tappedStar.tag + 1; i++)
     {
         UIButton *star = self.stars[i];

@@ -20,6 +20,7 @@
 @property (strong, nonatomic) SBRatePromptStarsView *view;
 @property (weak, nonatomic) id<SBRatePromptStarsDialogDelegate> delegate;
 
+- (void)animateInWithDuration:(NSTimeInterval)animationDuration;
 - (void)animateAwayWithDuration:(NSTimeInterval)animationDuration;
 
 @end

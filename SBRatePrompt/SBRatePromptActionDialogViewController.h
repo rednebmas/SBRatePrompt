@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^SBDialogBlock)(void);
+
 @interface SBRatePromptActionDialogViewController : UIViewController
 
 - (void)animateInWithDuration:(NSTimeInterval)animationDuration;
+- (void)animateAwayWithDuration:(NSTimeInterval)animationDuration;
+- (void)onLeftButtonTap:(SBDialogBlock)leftButtonBlock onRightButtonTap:(SBDialogBlock)rightButtonBlock;
 
 @end

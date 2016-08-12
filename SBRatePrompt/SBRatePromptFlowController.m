@@ -43,6 +43,7 @@
                        initWithNibName:@"SBRatePromptStarsDialogView"
                        bundle:SBRatePromptBundle];
     self.starDialog.delegate = self;
+    [self.starDialog animateInWithDuration:.25];
     [self.window addSubview:self.starDialog.view];
 }
 
@@ -50,6 +51,13 @@
     self.actionDialog = [[SBRatePromptActionDialogViewController alloc]
                          initWithNibName:@"SBRatePromptActionDialogView"
                          bundle:SBRatePromptBundle];
+    
+    [self.actionDialog onLeftButtonTap:^{
+        [self dismiss];
+    } onRightButtonTap:^{
+        [self dismiss];
+    }];
+    
     [self.window addSubview:self.actionDialog.view];
 }
 
@@ -59,11 +67,22 @@
     [self.starDialog.view removeFromSuperview];
 }
 
+- (void)dismiss {
+    NSTimeInterval animationDuration = .25;
+    
+    [self.actionDialog animateAwayWithDuration:animationDuration - .05];
+    [self.windowController
+     animateDismissWithDuration:animationDuration
+     andOnCompletion:^{
+         self.windowController = nil;
+     }];
+}
+
 #pragma mark - Star rating prompt dialog delegate
 
 - (void)userSelectedRating:(NSInteger)rating {
-    NSTimeInterval waitBeforeMovingAwayFromStarsDialog = 1.0;
-    NSTimeInterval animationDuration = 0.75;
+    NSTimeInterval waitBeforeMovingAwayFromStarsDialog = 0.4;
+    NSTimeInterval animationDuration = 0.65;
     
     [self loadActionDialog];
     
@@ -75,12 +94,6 @@
     [SBDispatch dispatch:^{
         [self removeStarsDialog];
     } afterDuration:waitBeforeMovingAwayFromStarsDialog + animationDuration];
-    
-    [SBDispatch dispatch:^{
-        [self.windowController dismissAndOnCompletion:^{
-            self.windowController = nil;
-        }];
-    } afterDuration:3.0];
 }
 
 @end

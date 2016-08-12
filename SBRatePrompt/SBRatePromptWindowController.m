@@ -36,16 +36,21 @@
     return _window;
 }
 
-- (void)dismissAndOnCompletion:(void (^)(void))competion
+- (void)animateDismissWithDuration:(NSTimeInterval)duration
+                   andOnCompletion:(void (^)(void))competion
 {
-    self.window.rootViewController = nil;
-    [self.window removeFromSuperview];
-    self.window.hidden = YES;
-    self.window = nil;
-    
-    if (competion) {
-        competion();
-    }
+    [UIView animateWithDuration:duration animations:^{
+        self.window.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        self.window.rootViewController = nil;
+        [self.window removeFromSuperview];
+        self.window.hidden = YES;
+        self.window = nil;
+        
+        if (competion) {
+            competion();
+        }
+    }];
 }
 
 
