@@ -15,5 +15,8 @@ typedef void (^SBDialogBlock)(void);
 - (void)animateInWithDuration:(NSTimeInterval)animationDuration;
 - (void)animateAwayWithDuration:(NSTimeInterval)animationDuration;
 - (void)onLeftButtonTap:(SBDialogBlock)leftButtonBlock onRightButtonTap:(SBDialogBlock)rightButtonBlock;
+- (void)setText:(NSString*)text;
+- (void)setRightButtonTitle:(NSString*)title;
+- (void)setLeftButtonTitle:(NSString*)title;
 
 @end

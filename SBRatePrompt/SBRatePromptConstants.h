@@ -14,5 +14,6 @@
 
 + (CGFloat)dialogWidth;
 + (CGFloat)dialogAnimationDistanceOffset;
++ (NSString*)appName;
 
 @end

@@ -18,6 +18,11 @@
 @property (nonatomic, retain) NSLayoutConstraint *xCenterConstraint;
 @property (nonatomic, copy) SBDialogBlock onLeftButtonTap;
 @property (nonatomic, copy) SBDialogBlock onRightButtonTap;
+@property (nonatomic, retain) NSString *textLabelText;
+
+@property (weak, nonatomic) IBOutlet UILabel *textLabel;
+@property (weak, nonatomic) IBOutlet UIButton *leftButton;
+@property (weak, nonatomic) IBOutlet UIButton *rightButton;
 
 @end
 
@@ -27,6 +32,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (self.textLabelText) {
+        [self.textLabel setText:self.textLabelText];
+    }
 }
 
 - (void)updateViewConstraints
@@ -78,6 +87,25 @@
                      animations:^{
                          self.view.transform = CGAffineTransformMakeScale(0.001, 0.001);
                      }];
+}
+
+- (void)setText:(NSString*)text
+{
+    if (self.isViewLoaded) {
+        [self.textLabel setText:text];
+    }
+    
+    self.textLabelText = text;
+}
+
+- (void)setRightButtonTitle:(NSString*)title
+{
+    [self.rightButton setTitle:title forState:UIControlStateNormal];
+}
+
+- (void)setLeftButtonTitle:(NSString*)title
+{
+    [self.leftButton setTitle:title forState:UIControlStateNormal];
 }
 
 #pragma mark - Actions

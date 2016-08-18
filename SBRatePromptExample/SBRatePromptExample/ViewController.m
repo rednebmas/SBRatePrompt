@@ -26,6 +26,9 @@
 }
 
 - (IBAction)show:(id)sender {
+    // [SBRatePrompt setAskForFeedback:YES];
+    // [SBRatePrompt setAppName:@"TUNERVAL"];
+    
     [SBRatePrompt debugShow];
 }
 

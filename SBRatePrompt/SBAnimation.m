@@ -31,4 +31,18 @@
     [layer addAnimation:animation forKey:animation.keyPath];
 }
 
++ (void)shrinkView:(UIView*)view withDuration:(NSTimeInterval)duration completion:(voidBlock)completion {
+    [UIView animateWithDuration:duration
+                     animations:^
+    {
+        view.transform = CGAffineTransformMakeScale(0.001, 0.001);
+    }
+                     completion:^(BOOL finished)
+    {
+        if (completion) {
+            completion();
+        }
+    }];
+}
+
 @end

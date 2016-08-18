@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SBRatePromptStarsDialogViewController">
             <connections>
+                <outlet property="howWouldYouRateLabel" destination="4gL-c0-UTV" id="nQf-BE-2O3"/>
                 <outlet property="view" destination="kYe-xR-0GF" id="vj0-xh-Y0s"/>
             </connections>
         </placeholder>

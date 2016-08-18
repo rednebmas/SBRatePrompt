@@ -15,6 +15,7 @@
 
 @property (nonatomic, assign) BOOL hasAddedConstraints;
 @property (nonatomic, retain) NSLayoutConstraint *xCenterConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *howWouldYouRateLabel;
 
 @end
 
@@ -28,6 +29,13 @@
 {
     [super viewDidLoad];
     self.view.delegate = self;
+    [self configureHowWouldYouRateLabelText];
+}
+
+- (void)configureHowWouldYouRateLabelText
+{
+    NSString *text = [NSString stringWithFormat:@"How would you rate %@?", [SBRatePromptConstants appName]];
+    [self.howWouldYouRateLabel setText:text];
 }
 
 #pragma mark - Constraints

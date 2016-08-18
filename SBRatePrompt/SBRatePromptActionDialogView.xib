@@ -7,6 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SBRatePromptActionDialogViewController">
             <connections>
+                <outlet property="leftButton" destination="DXy-nG-8Ga" id="gHj-OY-Y96"/>
+                <outlet property="rightButton" destination="Tm3-0q-KSL" id="gzf-mF-cXK"/>
+                <outlet property="textLabel" destination="idb-xt-2xa" id="SM0-60-Tfx"/>
                 <outlet property="view" destination="SGJ-tn-OcY" id="G8v-i7-UHk"/>
             </connections>
         </placeholder>
@@ -49,7 +52,7 @@
                         <constraint firstAttribute="height" constant="45" id="JSq-Vs-IOs"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                    <state key="normal" title="OK">
+                    <state key="normal" title="Ok!">
                         <color key="titleColor" red="0.26274509800000001" green="0.4941176471" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
