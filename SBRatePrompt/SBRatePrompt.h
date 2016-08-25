@@ -21,6 +21,24 @@ FOUNDATION_EXPORT const unsigned char SBRatePromptVersionString[];
 
 + (void)debugShow;
 
+// @default: @"example@mail.com"
+// @discussion: when the user chooses to send feedback because the rating was below feedbackThreshold, this is the email
+//              that will be used.
++ (NSString*)feedbackEmailAddress;
++ (void)setFeedbackEmailAddress:(NSString*)feedbackEmailAddress;
+
+// @default: see github
+// @discussion: when the user chooses to send feedback because the rating was below feedbackThreshold, this is the email
+//              body that will be used. Must be in HTML format, i.e. newline characters will not be reflected.
+//              important: setting this will cause the default content to not be displayed.
++ (NSString*)feedbackEmailBody;
++ (void)setFeedbackEmailBody:(NSString*)feedbackEmailBody;
+
+// @default: @"AppName Feedback"
+// @discussion: the subject for the feedback email
++ (NSString*)feedbackEmailSubject;
++ (void)setFeedbackEmailSubject:(NSString*)feedbackEmailSubject;
+
 // @default: YES
 // @discussion: if set to NO, will only prompt to rate in the app store if greater than feedback threshold
 + (BOOL)askForFeedback;
