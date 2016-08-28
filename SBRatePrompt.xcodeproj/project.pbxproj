@@ -33,6 +33,8 @@
 		225B12941D5452BE00F4A2D4 /* SBRatePromptActionDialogView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 225B12911D5452BE00F4A2D4 /* SBRatePromptActionDialogView.xib */; };
 		225B12971D57AF0800F4A2D4 /* SBAutoLayoutUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 225B12951D57AF0800F4A2D4 /* SBAutoLayoutUtility.h */; };
 		225B12981D57AF0800F4A2D4 /* SBAutoLayoutUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 225B12961D57AF0800F4A2D4 /* SBAutoLayoutUtility.m */; };
+		22748ADC1D70123D00FFE8C7 /* SBRatePromptEventCounter.h in Headers */ = {isa = PBXBuildFile; fileRef = 22748ADA1D70123D00FFE8C7 /* SBRatePromptEventCounter.h */; };
+		22748ADD1D70123D00FFE8C7 /* SBRatePromptEventCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 22748ADB1D70123D00FFE8C7 /* SBRatePromptEventCounter.m */; };
 		22C5BDF91D5AE55D00947272 /* SBRatePromptWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 22C5BDF71D5AE55D00947272 /* SBRatePromptWindowController.h */; };
 		22C5BDFA1D5AE55D00947272 /* SBRatePromptWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C5BDF81D5AE55D00947272 /* SBRatePromptWindowController.m */; };
 /* End PBXBuildFile section */
@@ -77,6 +79,8 @@
 		225B12911D5452BE00F4A2D4 /* SBRatePromptActionDialogView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBRatePromptActionDialogView.xib; sourceTree = "<group>"; };
 		225B12951D57AF0800F4A2D4 /* SBAutoLayoutUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBAutoLayoutUtility.h; sourceTree = "<group>"; };
 		225B12961D57AF0800F4A2D4 /* SBAutoLayoutUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAutoLayoutUtility.m; sourceTree = "<group>"; };
+		22748ADA1D70123D00FFE8C7 /* SBRatePromptEventCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBRatePromptEventCounter.h; sourceTree = "<group>"; };
+		22748ADB1D70123D00FFE8C7 /* SBRatePromptEventCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBRatePromptEventCounter.m; sourceTree = "<group>"; };
 		22C5BDF71D5AE55D00947272 /* SBRatePromptWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBRatePromptWindowController.h; sourceTree = "<group>"; };
 		22C5BDF81D5AE55D00947272 /* SBRatePromptWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBRatePromptWindowController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,6 +160,8 @@
 			children = (
 				223200701D49D77700F1C864 /* SBRatePromptConstants.h */,
 				223200711D49D77700F1C864 /* SBRatePromptConstants.m */,
+				22748ADA1D70123D00FFE8C7 /* SBRatePromptEventCounter.h */,
+				22748ADB1D70123D00FFE8C7 /* SBRatePromptEventCounter.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -212,6 +218,7 @@
 				22C5BDF91D5AE55D00947272 /* SBRatePromptWindowController.h in Headers */,
 				2232005F1D49CAE300F1C864 /* SBRatePromptWindow.h in Headers */,
 				2232006D1D49D6CA00F1C864 /* SBAnimation.h in Headers */,
+				22748ADC1D70123D00FFE8C7 /* SBRatePromptEventCounter.h in Headers */,
 				225B12921D5452BE00F4A2D4 /* SBRatePromptActionDialogViewController.h in Headers */,
 				224A999C1D49BD7A000FD1C1 /* SBRatePrompt.h in Headers */,
 				223200591D49C03000F1C864 /* SBRatePromptFlowController.h in Headers */,
@@ -323,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2232005A1D49C03000F1C864 /* SBRatePromptFlowController.m in Sources */,
+				22748ADD1D70123D00FFE8C7 /* SBRatePromptEventCounter.m in Sources */,
 				225B12931D5452BE00F4A2D4 /* SBRatePromptActionDialogViewController.m in Sources */,
 				225B12981D57AF0800F4A2D4 /* SBAutoLayoutUtility.m in Sources */,
 				224A99F91D49BEC9000FD1C1 /* SBRatePrompt.m in Sources */,

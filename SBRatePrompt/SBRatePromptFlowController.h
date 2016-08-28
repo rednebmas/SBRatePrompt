@@ -10,6 +10,9 @@
 
 @interface SBRatePromptFlowController : NSObject
 
+@property (nonatomic, copy) void (^ratedCallback)(NSInteger rating, SBRatePromptAction action);
+@property (nonatomic, copy) BOOL (^displayEmailFeedbackCallback)(void);
+
 - (void)begin;
 
 @end

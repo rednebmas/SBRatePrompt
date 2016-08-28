@@ -75,9 +75,15 @@
 {
     [self.actionDialog onLeftButtonTap:^{
         [self dismiss];
+        if (self.ratedCallback) {
+            self.ratedCallback(self.rating, SBRatePromptActionNoThanks);
+        }
     } onRightButtonTap:^{
         [self openAppInAppStore];
         [self dismiss];
+        if (self.ratedCallback) {
+            self.ratedCallback(self.rating, SBRatePromptActionRateInAppStore);
+        }
     }];
 }
          
@@ -85,10 +91,24 @@
 {
     [self.actionDialog onLeftButtonTap:^{
         [self dismiss];
+        if (self.ratedCallback) {
+            self.ratedCallback(self.rating, SBRatePromptActionNoThanks);
+        }
     } onRightButtonTap:^{
         [self dismiss];
-        [self displayEmailComposer];
+        [self displayEmailComposerIfRequested];
+        if (self.ratedCallback) {
+            self.ratedCallback(self.rating, SBRatePromptActionProvideFeedback);
+        }
     }];
+}
+
+- (void)displayEmailComposerIfRequested {
+    if (self.displayEmailFeedbackCallback) {
+        if (self.displayEmailFeedbackCallback()) {
+            [self displayEmailComposer];
+        }
+    }
 }
 
 #pragma mark - Action Dialog actions
@@ -100,7 +120,7 @@
         MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
         mail.mailComposeDelegate = self;
         [mail setSubject:[SBRatePrompt feedbackEmailSubject]];
-        [mail setMessageBody:[self feedbackEmailBody] isHTML:YES]; // why not?
+        [mail setMessageBody:[self feedbackEmailBody] isHTML:YES]; 
         [mail setToRecipients:@[[SBRatePrompt feedbackEmailAddress]]];
         
         UIWindow *mainWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
@@ -131,7 +151,7 @@
                                        "I rated %@ %ld stars."
                                        "<br/>%@</span>",
             [SBRatePromptConstants appName],
-            self.rating,
+            (long)self.rating,
             [self starImagesHTML]];
 }
 
@@ -207,11 +227,16 @@
 
 #pragma mark - Star rating prompt dialog delegate
 
-- (void)userSelectedRating:(NSInteger)rating {
+- (void)userSelectedRating:(NSInteger)rating
+{
     self.rating = rating;
     NSTimeInterval waitBeforeMovingAwayFromStarsDialog = 0.4;
     if (![SBRatePrompt askForFeedback] && rating <= [SBRatePrompt feedbackThreshold])
     {
+        if (self.ratedCallback) {
+            self.ratedCallback(self.rating, SBRatePromptActionAskForFeedbackNotShown);
+        }
+
         [SBDispatch dispatch:^{
             [self dismiss];
         } afterDuration:waitBeforeMovingAwayFromStarsDialog];

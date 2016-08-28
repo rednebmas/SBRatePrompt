@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,8 +18,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xoD-4P-GH9">
+                                <rect key="frame" x="135" y="305" width="330" height="46"/>
+                                <color key="backgroundColor" red="0.81176470590000005" green="0.25882352939999997" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="330" id="qiQ-LW-Pbw"/>
+                                </constraints>
+                                <state key="normal" title="Log Event (displays prompt after 3 taps)">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="logEvent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OkX-Su-0KN"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kNJ-yi-dx1">
-                                <rect key="frame" x="204.5" y="277" width="191" height="46"/>
+                                <rect key="frame" x="205" y="249" width="191" height="46"/>
                                 <color key="backgroundColor" red="0.26274509800000001" green="0.4941176471" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="XsL-aj-Rke"/>
@@ -39,7 +58,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="kNJ-yi-dx1" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="B1u-cZ-Khg"/>
+                            <constraint firstItem="xoD-4P-GH9" firstAttribute="height" secondItem="kNJ-yi-dx1" secondAttribute="height" id="7po-2h-OKO"/>
+                            <constraint firstItem="xoD-4P-GH9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9UQ-qn-W8i"/>
+                            <constraint firstItem="kNJ-yi-dx1" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-5" id="B1u-cZ-Khg"/>
+                            <constraint firstItem="xoD-4P-GH9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="5" id="N45-xF-Iqc"/>
                             <constraint firstItem="kNJ-yi-dx1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="U2l-sB-ovg"/>
                         </constraints>
                     </view>

@@ -9,10 +9,11 @@
 #import "SBRatePrompt.h"
 #import "SBRatePromptFlowController.h"
 #import "SBRatePromptConstants.h"
+#import "SBRatePromptEventCounter.h"
 
 @interface SBRatePrompt()
 
-// publicly exposed
+//// publicly exposed
 @property (nonatomic, assign) BOOL askForFeedback;
 @property (nonatomic, assign) NSInteger feedbackThreshold;
 @property (nonatomic, strong) NSString *appName;
@@ -20,9 +21,9 @@
 @property (nonatomic, strong) NSString *feedbackEmailBody;
 @property (nonatomic, strong) NSString *feedbackEmailSubject;
 
-// private
+//// private
 @property (nonatomic, strong) SBRatePromptFlowController *flowController;
-
+@property (nonatomic, strong) SBRatePromptEventCounter *eventCounter;
 
 @end
 
@@ -44,26 +45,59 @@
 {
     self = [super init];
     if (self) {
-        [self configureDefaults];
+        [self configure];
     }
     return self;
 }
 
-- (void)configureDefaults
+- (void)configure
 {
+    self.flowController = [SBRatePromptFlowController new];
+    
+    __weak typeof(self) weakSelf = self;
+    self.eventCounter = [[SBRatePromptEventCounter alloc] initWithTrigger:^{
+        [weakSelf show];
+    }];
+    
+    // default values
     _askForFeedback = YES;
     _feedbackThreshold = 4;
     _feedbackEmailAddress = @"example@mail.com";
 }
 
 #pragma mark - Public
-#pragma mark - Public methods
 
 + (void)debugShow {
-    [[SBRatePrompt sharedInstance] debugShow];
+    [[SBRatePrompt sharedInstance] show];
+}
+
+#pragma mark - Events
+
++ (void)logEvent:(NSString*)eventName {
+    SBRatePrompt *instance = [SBRatePrompt sharedInstance];
+    [instance.eventCounter logEvent:eventName];
+}
+
++ (void)setTriggerValue:(NSInteger)triggerValue forEvent:(NSString*)eventName {
+    SBRatePrompt *instance = [SBRatePrompt sharedInstance];
+    [instance.eventCounter setTriggerValue:triggerValue forEvent:eventName];
 }
 
 #pragma mark - Public properties
+
+#pragma mark - Callbacks
+
++ (void)setRatedCallback:(void (^)(NSInteger rating, SBRatePromptAction action))callback {
+    SBRatePrompt *instance = [SBRatePrompt sharedInstance];
+    instance.flowController.ratedCallback = callback;
+}
+
++ (void)setDisplayEmailFeedbackCallback:(BOOL (^)(void))callback {
+    SBRatePrompt *instance = [SBRatePrompt sharedInstance];
+    instance.flowController.displayEmailFeedbackCallback = callback;
+}
+
+#pragma mark - Other properties
 
 + (BOOL)askForFeedback {
     return [[SBRatePrompt sharedInstance] askForFeedback];
@@ -92,30 +126,25 @@
     instance.appName = appName;
 }
 
-+ (NSString*)feedbackEmailAddress
-{
++ (NSString*)feedbackEmailAddress {
     return [[SBRatePrompt sharedInstance] feedbackEmailAddress];
 }
 
-+ (void)setFeedbackEmailAddress:(NSString*)feedbackEmailAddress
-{
++ (void)setFeedbackEmailAddress:(NSString*)feedbackEmailAddress {
     SBRatePrompt *instance = [SBRatePrompt sharedInstance];
     instance.feedbackEmailAddress = feedbackEmailAddress;
 }
 
-+ (NSString*)feedbackEmailBody
-{
++ (NSString*)feedbackEmailBody {
     return [[SBRatePrompt sharedInstance] feedbackEmailBody];
 }
 
-+ (void)setFeedbackEmailBody:(NSString*)feedbackEmailBody
-{
++ (void)setFeedbackEmailBody:(NSString*)feedbackEmailBody {
     SBRatePrompt *instance = [SBRatePrompt sharedInstance];
     instance.feedbackEmailBody = feedbackEmailBody;
 }
 
-+ (NSString*)feedbackEmailSubject
-{
++ (NSString*)feedbackEmailSubject {
     NSString *feedbackEmailSubject = [[SBRatePrompt sharedInstance] feedbackEmailSubject];
     if (feedbackEmailSubject) {
         return feedbackEmailSubject;
@@ -124,8 +153,7 @@
     return [NSString stringWithFormat:@"%@ Feedback", [SBRatePromptConstants appName]];
 }
 
-+ (void)setFeedbackEmailSubject:(NSString*)feedbackEmailSubject
-{
++ (void)setFeedbackEmailSubject:(NSString*)feedbackEmailSubject {
     SBRatePrompt *instance = [SBRatePrompt sharedInstance];
     instance.feedbackEmailSubject = feedbackEmailSubject;
 }
@@ -133,8 +161,7 @@
 #pragma mark - Private
 #pragma mark - Helper
 
-- (void)debugShow {
-    self.flowController = [SBRatePromptFlowController new];
+- (void)show {
     [self.flowController begin];
 }
 
